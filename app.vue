@@ -36,9 +36,10 @@ useHead({
 //   /* 更多屬性如 font-weight 或 font-style 可以在這裡指定 */
 // }
 
-// * {
-//   font-family: "Roboto";
-// }
+* {
+  // font-family: "Roboto";
+  box-sizing: border-box;
+}
 
 .btnLink {
   color: orange;
