@@ -4,19 +4,27 @@
     <div class="sticky top-0 z-10 bg-teal-700 text-white">
       <div class="mx-auto flex max-w-4xl items-center justify-between p-4">
         <div class="text-3xl font-medium">
-          <a href="#home" class="hover:opacity-90"> 🚀 Jim Rockets</a>
+          <a href="#Home" class="hover:opacity-90"> 🚀 Jim Rockets</a>
         </div>
         <div class="cursor-pointer text-3xl sm:hidden">&#9776;</div>
         <div class="hidden space-x-8 text-xl sm:block">
-          <a href="#rocket" class="hover:opacity-80">Our Rockets</a>
-          <a href="#testimonials" class="hover:opacity-80">Testimonials</a>
-          <a href="#contact" class="hover:opacity-80">Contact</a>
+          <a href="#Rockets" class="hover:opacity-80">Our Rockets</a>
+          <a href="#Testimonials" class="hover:opacity-80">Testimonials</a>
+          <a href="#Contact" class="hover:opacity-80">Contact</a>
         </div>
+
+        <el-switch
+          v-model="themeMode"
+          size="large"
+          style="--el-switch-on-color: #1a2b3c"
+          :active-action-icon="Moon"
+          :inactive-action-icon="Sunny"
+        />
       </div>
     </div>
 
     <!-- main content -->
-    <div class="mx-auto max-w-4xl">
+    <div class="mx-auto max-w-4xl scroll-m-[100px]" id="Home">
       <div class="flex flex-col-reverse items-center gap-8 p-6 sm:flex-row">
         <div class="sm:w-1/2">
           <div
@@ -49,7 +57,7 @@
 
       <div
         id="Rockets"
-        class="px-6 py-12 text-center text-4xl font-bold sm:text-5xl"
+        class="scroll-mt-[50px] px-6 py-12 text-center text-4xl font-bold sm:text-5xl"
       >
         <div class="mb-12">Our Rockets</div>
 
@@ -83,7 +91,7 @@
       <hr class="mx-auto my-12 w-1/2 bg-black dark:bg-white" />
 
       <div
-        id="Rockets"
+        id="Testimonials"
         class="py-12 text-center text-4xl font-bold sm:text-5xl"
       >
         Testimonials
@@ -92,7 +100,7 @@
       <hr class="mx-auto my-12 w-1/2 bg-black dark:bg-white" />
 
       <div
-        id="Rockets"
+        id="Contact"
         class="py-12 text-center text-4xl font-bold sm:text-5xl"
       >
         Contact Us
@@ -102,8 +110,26 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, watchEffect } from "vue";
+import { Sunny, Moon } from "@element-plus/icons-vue";
 // import rocketman from "@/assets/img/rocketman.png";
+onBeforeMount(() => {
+  let htmlTag = document.querySelector("html");
+  htmlTag?.classList.add("dark");
+});
+
+let themeMode = ref(true);
+
+watchEffect(() => {
+  let htmlTag = document?.querySelector("html");
+  if (htmlTag) {
+    if (themeMode.value) {
+      htmlTag?.classList.add("dark");
+    } else {
+      htmlTag?.classList.remove("dark");
+    }
+  }
+});
 
 let RocketsBlockList = reactive([
   {
