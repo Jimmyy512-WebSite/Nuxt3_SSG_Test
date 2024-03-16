@@ -14,6 +14,7 @@
         </div>
 
         <el-switch
+          class="!hidden sm:!block"
           v-model="themeMode"
           size="large"
           style="--el-switch-on-color: #1a2b3c"
@@ -25,7 +26,9 @@
 
     <!-- main content -->
     <div class="mx-auto max-w-4xl scroll-m-[100px]" id="Home">
-      <div class="flex flex-col-reverse items-center gap-8 p-6 sm:flex-row">
+      <div
+        class="widescreen:section-min-height flex flex-col-reverse items-center gap-8 p-6 sm:flex-row"
+      >
         <div class="sm:w-1/2">
           <div
             class="max-w-md text-center text-4xl font-bold text-slate-900 sm:text-left sm:text-5xl dark:text-white"
@@ -95,6 +98,41 @@
         class="py-12 text-center text-4xl font-bold sm:text-5xl"
       >
         Testimonials
+
+        <div class="Testimonial mx-auto max-w-4xl px-2">
+          <div class="TestimonialBlockContent">
+            Acme has always been there for me. Their Explorer rocket arrived in
+            a wooden crate as expected. Life-long customer! A++ shopping
+            experience.
+          </div>
+          <div class="text-right text-2xl text-slate-700 dark:text-slate-400">
+            —Wile E. Coyote, Genius
+          </div>
+        </div>
+
+        <div class="Testimonial mx-auto max-w-4xl px-2">
+          <div class="TestimonialBlockContent">
+            The Acme Adventurer Rocket has thwarted my Illudium Q-36 Explosive
+            Space Modulator on several occassions. This makes me very, very
+            angry! Nevertheless, K-9 and I have awarded Acme the Martian
+            contract for space exploration rockets based on Acme's quality and
+            sturdy designs.
+          </div>
+          <div class="text-right text-2xl text-slate-700 dark:text-slate-400">
+            —Marvin The Martian & K-9
+          </div>
+        </div>
+
+        <div class="Testimonial mx-auto max-w-4xl px-2">
+          <div class="TestimonialBlockContent">
+            I knew I not only wanted — I needed — Acme's Infinity Rocket for my
+            mission in space. Acme delivered in one day! Nothing says "Take me
+            to your leader" like Acme's Infinity Rocket! 💯
+          </div>
+          <div class="text-right text-2xl text-slate-700 dark:text-slate-400">
+            —Buzz Lightyear
+          </div>
+        </div>
       </div>
 
       <hr class="mx-auto my-12 w-1/2 bg-black dark:bg-white" />
@@ -135,7 +173,6 @@ let RocketsBlockList = reactive([
   {
     title: "Explorer",
     Description: "Affordable Exploration!",
-    // image: rocketman,
     image: "/img/rocketman.png",
   },
   {
@@ -150,3 +187,22 @@ let RocketsBlockList = reactive([
   },
 ]);
 </script>
+
+<style lang="scss" scoped>
+.TestimonialBlockContent {
+  @apply relative my-12 p-14 text-left text-3xl  text-slate-700  before:absolute before:-left-0 before:-top-0 before:translate-x-2 before:translate-y-2 before:font-serif before:text-8xl before:opacity-25 before:content-['\201C'] after:absolute after:bottom-0 after:right-0 after:translate-x-0 after:translate-y-8 after:font-serif after:text-8xl after:opacity-25 after:content-['\201D'];
+}
+
+.TestimonialBlockName {
+  @apply text-right text-2xl text-slate-700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .TestimonialBlockContent {
+    @apply text-slate-400;
+  }
+  .TestimonialBlockName {
+    @apply text-slate-400;
+  }
+}
+</style>
