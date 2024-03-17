@@ -26,6 +26,7 @@
 
     <!-- main content -->
     <div class="mx-auto max-w-4xl scroll-m-[100px]" id="Home">
+      <!-- introduction -->
       <div
         class="widescreen:section-min-height flex flex-col-reverse items-center gap-8 p-6 sm:flex-row"
       >
@@ -58,6 +59,7 @@
 
       <hr class="mx-auto my-12 w-1/2 bg-black dark:bg-white" />
 
+      <!-- our rockets -->
       <div
         id="Rockets"
         class="scroll-mt-[50px] px-6 py-12 text-center text-4xl font-bold sm:text-5xl"
@@ -93,9 +95,10 @@
 
       <hr class="mx-auto my-12 w-1/2 bg-black dark:bg-white" />
 
+      <!-- testimonials -->
       <div
         id="Testimonials"
-        class="py-12 text-center text-4xl font-bold sm:text-5xl"
+        class="scroll-mt-[50px] py-12 text-center text-4xl font-bold sm:text-5xl"
       >
         Testimonials
 
@@ -139,9 +142,42 @@
 
       <div
         id="Contact"
-        class="py-12 text-center text-4xl font-bold sm:text-5xl"
+        class="scroll-mt-[50px] py-12 text-center text-4xl font-bold sm:text-5xl"
       >
         Contact Us
+      </div>
+
+      <div class="flex flex-col gap-4 p-6 pb-20 sm:p-0 sm:pb-20">
+        <div class="text-3xl">Subject:</div>
+        <el-input
+          v-model="formData.subject"
+          class="h-10 !text-xl"
+          style=""
+          placeholder="Please input your subject"
+        />
+
+        <div class="text-3xl">Message:</div>
+        <el-input
+          v-model="formData.message"
+          type="textarea"
+          class="!text-xl"
+          style=""
+          placeholder="Please input your message"
+          rows="10"
+        />
+        <div class="flex justify-center sm:justify-start">
+          <div
+            class="w-fit cursor-pointer rounded-md bg-teal-600 px-10 py-4 text-3xl hover:bg-teal-500"
+            @click="
+              ElMessage({
+                message: '已送出',
+                type: 'success',
+              })
+            "
+          >
+            Submit
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -157,6 +193,10 @@ onBeforeMount(() => {
 });
 
 let themeMode = ref(true);
+let formData = reactive({
+  subject: "",
+  message: "",
+});
 
 watchEffect(() => {
   let htmlTag = document?.querySelector("html");
