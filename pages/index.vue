@@ -180,13 +180,31 @@
         </div>
       </div>
     </div>
+
+    <!-- header -->
+    <div class="bg-teal-700 text-white">
+      <div
+        class="mx-auto flex max-w-4xl flex-col justify-between p-4 text-xl sm:flex-row"
+      >
+        <div class="mb-6 text-base sm:mb-0 sm:text-xl">
+          Acme Rocket-Powered Products, Inc.<br />
+          555 Astro Way<br />
+          Fairfield, New Jersey 12345-5555<br />
+          Email: Inquires@AcmeRockets.com<br />
+          Phone: (555) 555-5555
+        </div>
+
+        <div class="text-center text-base sm:text-left sm:text-xl">
+          Copyright © 2024 <br />All Rights Reserved
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, watchEffect } from "vue";
 import { Sunny, Moon } from "@element-plus/icons-vue";
-// import rocketman from "@/assets/img/rocketman.png";
 onBeforeMount(() => {
   let htmlTag = document.querySelector("html");
   htmlTag?.classList.add("dark");
@@ -230,7 +248,7 @@ let RocketsBlockList = reactive([
 
 <style lang="scss" scoped>
 .TestimonialBlockContent {
-  @apply relative my-12 p-14 text-left text-3xl  text-slate-700  before:absolute before:-left-0 before:-top-0 before:translate-x-2 before:translate-y-2 before:font-serif before:text-8xl before:opacity-25 before:content-['\201C'] after:absolute after:bottom-0 after:right-0 after:translate-x-0 after:translate-y-8 after:font-serif after:text-8xl after:opacity-25 after:content-['\201D'];
+  @apply relative my-2 p-14 text-left text-xl  text-slate-700  before:absolute before:-left-0 before:-top-0 before:translate-x-2 before:translate-y-2 before:font-serif before:text-8xl before:opacity-25 before:content-['\201C'] after:absolute after:bottom-0 after:right-0 after:translate-x-0 after:translate-y-8 after:font-serif after:text-8xl after:opacity-25 after:content-['\201D'] sm:my-12 sm:text-3xl;
 }
 
 .TestimonialBlockName {
