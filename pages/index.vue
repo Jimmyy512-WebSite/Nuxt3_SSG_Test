@@ -1,12 +1,24 @@
 <template>
-  <div class="min-h-screen bg-slate-50 dark:bg-black dark:text-white">
+  <div class="relative min-h-screen bg-slate-50 dark:bg-black dark:text-white">
     <!-- header -->
     <div class="sticky top-0 z-10 bg-teal-700 text-white">
       <div class="mx-auto flex max-w-4xl items-center justify-between p-4">
         <div class="text-3xl font-medium">
           <a href="#Home" class="hover:opacity-90"> 🚀 Jim Rockets</a>
         </div>
-        <div class="cursor-pointer text-3xl sm:hidden">&#9776;</div>
+        <div
+          class="cursor-pointer text-3xl sm:hidden"
+          :class="{
+            'rotate-to-x': !isFirstLoad && isShowMobileMenu,
+            'rotate-back': !isFirstLoad && !isShowMobileMenu,
+          }"
+          @click="handleMobileMenuClick"
+        >
+          <span v-if="!isShowMobileMenu" class="h-[38px]">&#9776;</span>
+          <el-icon v-else class="h-[38px] translate-y-[5px] font-bold"
+            ><Close />
+          </el-icon>
+        </div>
         <div class="hidden space-x-8 text-xl sm:block">
           <a href="#Rockets" class="hover:opacity-80">Our Rockets</a>
           <a href="#Testimonials" class="hover:opacity-80">Testimonials</a>
@@ -14,7 +26,7 @@
         </div>
 
         <el-switch
-          class="!hidden sm:!block"
+          class="!hidden sm:!flex sm:items-center"
           v-model="themeMode"
           size="large"
           style="--el-switch-on-color: #1a2b3c"
@@ -28,7 +40,7 @@
     <div class="mx-auto max-w-4xl scroll-m-[100px]" id="Home">
       <!-- introduction -->
       <div
-        class="widescreen:section-min-height flex flex-col-reverse items-center gap-8 p-6 sm:flex-row"
+        class="MinHeight flex flex-col-reverse items-center justify-center gap-8 p-6 sm:flex-row"
       >
         <div class="sm:w-1/2">
           <div
@@ -167,7 +179,7 @@
         />
         <div class="flex justify-center sm:justify-start">
           <div
-            class="w-fit cursor-pointer rounded-md bg-teal-600 px-10 py-4 text-3xl hover:bg-teal-500"
+            class="w-fit cursor-pointer rounded-md bg-teal-600 px-10 py-4 text-3xl text-white hover:bg-teal-500"
             @click="
               ElMessage({
                 message: '已送出',
@@ -181,7 +193,7 @@
       </div>
     </div>
 
-    <!-- header -->
+    <!-- footer -->
     <div class="bg-teal-700 text-white">
       <div
         class="mx-auto flex max-w-4xl flex-col justify-between p-4 text-xl sm:flex-row"
@@ -200,16 +212,51 @@
       </div>
     </div>
   </div>
+
+  <!-- Mobile Menu -->
+  <div
+    v-if="isShowMobileMenu"
+    class="fixed left-0 top-0 min-h-screen w-full origin-top animate-open-menu bg-black bg-opacity-90"
+  >
+    <div
+      class="absolute top-[68px] flex w-full flex-col items-center text-center text-3xl text-white"
+    >
+      <a href="#Home" class="MobileMenuATag" @click="isShowMobileMenu = false"
+        >Home</a
+      >
+      <a
+        href="#Rockets"
+        class="MobileMenuATag"
+        @click="isShowMobileMenu = false"
+        >Our Rockets</a
+      >
+      <a
+        href="#Testimonials"
+        class="MobileMenuATag"
+        @click="isShowMobileMenu = false"
+        >Testimonials</a
+      >
+      <a
+        href="#Contact"
+        class="MobileMenuATag"
+        @click="isShowMobileMenu = false"
+        >Contact</a
+      >
+      <div class="h-50 bg-b w-52"></div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, watchEffect } from "vue";
-import { Sunny, Moon } from "@element-plus/icons-vue";
+import { Sunny, Moon, Close } from "@element-plus/icons-vue";
 onBeforeMount(() => {
   let htmlTag = document.querySelector("html");
   htmlTag?.classList.add("dark");
 });
 
+let isShowMobileMenu = ref(false);
+let isFirstLoad = ref(true);
 let themeMode = ref(true);
 let formData = reactive({
   subject: "",
@@ -244,6 +291,14 @@ let RocketsBlockList = reactive([
     image: "/img/rocketlaunch.png",
   },
 ]);
+
+const handleMobileMenuClick = () => {
+  if (isFirstLoad) {
+    isFirstLoad.value = false;
+  }
+  isShowMobileMenu.value = !isShowMobileMenu.value;
+  console.warn("isShowMobileMenu:",isShowMobileMenu.value);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -255,12 +310,45 @@ let RocketsBlockList = reactive([
   @apply text-right text-2xl text-slate-700;
 }
 
+.MinHeight {
+  min-height: calc(100vh - 68px);
+}
+
 @media (prefers-color-scheme: dark) {
   .TestimonialBlockContent {
     @apply text-slate-400;
   }
   .TestimonialBlockName {
     @apply text-slate-400;
+  }
+}
+
+.MobileMenuATag {
+  @apply w-[90%] border-b-2 border-gray-300 p-6 hover:text-gray-300 xms:w-[80%] ms:w-[50%];
+}
+
+.rotate-to-x {
+  animation: rotate-to-x 0.3s forwards;
+}
+
+.rotate-back {
+  animation: rotate-back 0.3s forwards;
+}
+@keyframes rotate-to-x {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-back {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }
 </style>
