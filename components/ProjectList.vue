@@ -1,6 +1,4 @@
 <template>
-  <div>this is project list</div>
-  <!-- <div>{{ renderData }}</div> -->
   <div>
     <div
       v-for="repo in renderData"
@@ -31,19 +29,12 @@
 import { useNuxtApp } from "#app";
 
 const nuxtApp = useNuxtApp();
-const myGlobalVariable = nuxtApp.$myGlobalVariable;
 let reposData: any = ref([]);
-// await $fetch("https://api.github.com/users/jimmyy512/repos")
-//   .then((res) => res.json())
-//   .then((res) => {
-//     // console.warn("res:", res);
-//     data.value = res;
-//   });
 
 const renderData = computed(() => {
   return reposData.value
-    .filter((it) => it.description)
-    .sort((a, b) => {
+    .filter((it:any) => it.description)
+    .sort((a:any, b:any) => {
       return b.stargazers_count - a.stargazers_count;
     });
 });
@@ -58,12 +49,5 @@ onMounted(async () => {
     });
 });
 
-// onMounted(async () => {
-//   await fetch("https://api.github.com/users/jimmyy512/repos")
-//     .then((res) => res.json())
-//     .then((res) => {
-//       console.warn("res:", res);
-//       data.value = res;
-//     });
-// });
+
 </script>

@@ -19,10 +19,11 @@
             ><Close />
           </el-icon>
         </div>
-        <div class="hidden space-x-8 text-xl sm:block">
+        <div class="hidden space-x-8 text-base sm:block font-bold">
           <a href="#Rockets" class="hover:opacity-80">Our Rockets</a>
           <a href="#Testimonials" class="hover:opacity-80">Testimonials</a>
           <a href="#Contact" class="hover:opacity-80">Contact</a>
+          <a href="/project" class="hover:opacity-80">Projects</a>
         </div>
 
         <el-switch
@@ -241,6 +242,12 @@
         class="MobileMenuATag"
         @click="isShowMobileMenu = false"
         >Contact</a
+      >
+      <a
+        href="/project"
+        class="MobileMenuATag"
+        @click="isShowMobileMenu = false"
+        >Projects</a
       >
       <div class="h-50 bg-b w-52"></div>
     </div>
