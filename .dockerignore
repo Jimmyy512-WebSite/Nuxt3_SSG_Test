@@ -1,5 +1,7 @@
 node_modules
 npm-debug.log
+dist
 .nuxt
 .output
 .DS_Store
+dist

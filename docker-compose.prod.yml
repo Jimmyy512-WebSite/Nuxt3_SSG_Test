@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  vue3-todo-list:
+  nuxt3-ssg-test:
     build:
       context: .
       dockerfile: Dockerfile.prod

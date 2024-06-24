@@ -11,18 +11,8 @@ RUN npm install
 COPY . .
 RUN npm run generate
 
-# 等待 3 秒
-RUN sleep 3
-# 调试：列出生成的文件并保存到日志文件
-RUN ls -la /app > /app_contents.log
-RUN ls -la /app/dist > /dist_contents.log
-
 # 设置基础镜像为 Nginx
 FROM nginx:alpine
-
-# 拷贝构建日志文件
-COPY --from=build-stage /app_contents.log /app_contents.log
-COPY --from=build-stage /dist_contents.log /dist_contents.log
 
 # 拷贝前端构建结果到 Nginx 服务目录
 COPY --from=build-stage /app/dist /usr/share/nginx/html
