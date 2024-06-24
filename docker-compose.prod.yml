@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  nuxt3-ssg-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: nuxt3_ssg_test:latest # 为镜像指定一个名称
+    ports:
+      - "3104:80" # 将容器的 80 端口映射到宿主机的 3102 端口，供 Nginx 使用
+    volumes:
+      - ./var/log/nginx:/var/log/nginx
+    networks:
+      - main-network
+networks:
+  main-network:
+    external: true
