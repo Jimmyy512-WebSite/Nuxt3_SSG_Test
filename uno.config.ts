@@ -1,9 +1,9 @@
 // uno.config.ts
-import { defineConfig, presetUno, presetTypography } from "unocss";
+import { defineConfig, presetUno } from "unocss";
+import transformerDirectives from "@unocss/transformer-directives";
 
 export default defineConfig({
-  presets: [presetUno(), presetTypography()],
-  rules: [
-    ["a", { "text-decoration": "none", color: "inherit" }],
-  ],
+  presets: [presetUno()],
+  transformers: [transformerDirectives()],
+  rules: [["a", { "text-decoration": "none", color: "inherit" }]],
 });

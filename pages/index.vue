@@ -83,7 +83,7 @@
           class="mx-auto flex max-w-4xl flex-col items-center gap-4 sm:flex-row sm:justify-between"
         >
           <div
-            class="mb-8 w-2/3 rounded-3xl border border-black p-6 sm:w-1/3 dark:border-white"
+            class="mb-8 w-2/3 rounded-3xl border-solid border border-black p-6 sm:w-1/3 dark:border-white"
             v-for="(it, index) in RocketsBlockList"
             :key="it.title"
           >

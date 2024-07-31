@@ -22,6 +22,7 @@
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.7",
     "@unocss/nuxt": "^0.61.8",
+    "@unocss/transformer-directives": "^0.61.8",
     "nuxt-font-loader": "^2.3.5",
     "sass": "^1.71.1",
     "unocss": "^0.61.8"
