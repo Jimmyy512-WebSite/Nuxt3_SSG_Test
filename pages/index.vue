@@ -176,7 +176,7 @@
           class="!text-xl"
           style=""
           placeholder="Please input your message"
-          rows="10"
+          :rows="10"
         />
         <div class="flex justify-center sm:justify-start">
           <div
@@ -257,20 +257,15 @@
 <script setup lang="ts">
 import { reactive, watchEffect } from "vue";
 import { Sunny, Moon, Close } from "@element-plus/icons-vue";
-onBeforeMount(() => {
-  let htmlTag = document.querySelector("html");
-  htmlTag?.classList.add("dark");
-});
 
 let isShowMobileMenu = ref(false);
 let isFirstLoad = ref(true);
-let themeMode = ref(true);
+let themeMode = ref(false);
 let formData = reactive({
   subject: "",
   message: "",
 });
-
-watchEffect(() => {
+const initHtmlDarkTag = () => {
   let htmlTag = document?.querySelector("html");
   if (htmlTag) {
     if (themeMode.value) {
@@ -279,6 +274,14 @@ watchEffect(() => {
       htmlTag?.classList.remove("dark");
     }
   }
+};
+// onBeforeMount(() => {
+//   let htmlTag = document.querySelector("html");
+//   htmlTag?.classList.add("dark");
+// });
+
+watchEffect(() => {
+  initHtmlDarkTag();
 });
 
 let RocketsBlockList = reactive([
@@ -304,7 +307,7 @@ const handleMobileMenuClick = () => {
     isFirstLoad.value = false;
   }
   isShowMobileMenu.value = !isShowMobileMenu.value;
-  console.warn("isShowMobileMenu:",isShowMobileMenu.value);
+  console.warn("isShowMobileMenu:", isShowMobileMenu.value);
 };
 </script>
 
