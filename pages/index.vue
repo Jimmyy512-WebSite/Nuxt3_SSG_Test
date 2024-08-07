@@ -260,7 +260,7 @@ import { Sunny, Moon, Close } from "@element-plus/icons-vue";
 
 let isShowMobileMenu = ref(false);
 let isFirstLoad = ref(true);
-let themeMode = ref(false);
+let themeMode = ref(true);
 let formData = reactive({
   subject: "",
   message: "",
@@ -275,10 +275,6 @@ const initHtmlDarkTag = () => {
     }
   }
 };
-// onBeforeMount(() => {
-//   let htmlTag = document.querySelector("html");
-//   htmlTag?.classList.add("dark");
-// });
 
 watchEffect(() => {
   initHtmlDarkTag();
