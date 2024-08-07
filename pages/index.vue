@@ -4,7 +4,7 @@
     <div class="sticky top-0 z-10 bg-teal-700 text-white">
       <div class="mx-auto flex max-w-4xl items-center justify-between p-4">
         <div class="text-3xl font-medium">
-          <a href="#Home" class="hover:opacity-90"> 🚀 Jim Rockets</a>
+          <a href="#Home" class="hover:opacity-90"> 🚀 Jim Rocket</a>
         </div>
         <div
           class="cursor-pointer text-3xl sm:hidden"
@@ -83,7 +83,7 @@
           class="mx-auto flex max-w-4xl flex-col items-center gap-4 sm:flex-row sm:justify-between"
         >
           <div
-            class="mb-8 w-2/3 rounded-3xl border border-black p-6 sm:w-1/3 dark:border-white"
+            class="mb-8 w-2/3 rounded-3xl border-solid border border-black p-6 sm:w-1/3 dark:border-white"
             v-for="(it, index) in RocketsBlockList"
             :key="it.title"
           >
@@ -176,7 +176,7 @@
           class="!text-xl"
           style=""
           placeholder="Please input your message"
-          rows="10"
+          :rows="10"
         />
         <div class="flex justify-center sm:justify-start">
           <div
@@ -257,10 +257,6 @@
 <script setup lang="ts">
 import { reactive, watchEffect } from "vue";
 import { Sunny, Moon, Close } from "@element-plus/icons-vue";
-onBeforeMount(() => {
-  let htmlTag = document.querySelector("html");
-  htmlTag?.classList.add("dark");
-});
 
 let isShowMobileMenu = ref(false);
 let isFirstLoad = ref(true);
@@ -269,8 +265,7 @@ let formData = reactive({
   subject: "",
   message: "",
 });
-
-watchEffect(() => {
+const initHtmlDarkTag = () => {
   let htmlTag = document?.querySelector("html");
   if (htmlTag) {
     if (themeMode.value) {
@@ -279,6 +274,10 @@ watchEffect(() => {
       htmlTag?.classList.remove("dark");
     }
   }
+};
+
+watchEffect(() => {
+  initHtmlDarkTag();
 });
 
 let RocketsBlockList = reactive([
@@ -304,7 +303,7 @@ const handleMobileMenuClick = () => {
     isFirstLoad.value = false;
   }
   isShowMobileMenu.value = !isShowMobileMenu.value;
-  console.warn("isShowMobileMenu:",isShowMobileMenu.value);
+  console.warn("isShowMobileMenu:", isShowMobileMenu.value);
 };
 </script>
 
