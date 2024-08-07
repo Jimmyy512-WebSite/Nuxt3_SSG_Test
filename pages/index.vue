@@ -4,7 +4,7 @@
     <div class="sticky top-0 z-10 bg-teal-700 text-white">
       <div class="mx-auto flex max-w-4xl items-center justify-between p-4">
         <div class="text-3xl font-medium">
-          <a href="#Home" class="hover:opacity-90"> 🚀 Jim Rockets</a>
+          <a href="#Home" class="hover:opacity-90"> 🚀 Jim Rocket</a>
         </div>
         <div
           class="cursor-pointer text-3xl sm:hidden"
