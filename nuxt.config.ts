@@ -1,17 +1,21 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@element-plus/nuxt", "nuxt-font-loader", '@unocss/nuxt'],
+  modules: [
+    "@element-plus/nuxt",
+    "nuxt-font-loader",
+    "@unocss/nuxt",
+    "@vueuse/nuxt",
+    '@pinia/nuxt'
+  ],
 
   runtimeConfig: {
     public: {
-      isDev: process.env.NODE_ENV === 'development',
+      isDev: process.env.NODE_ENV === "development",
       PUBLIC_API_URL: process.env.API_DOMAIN,
-    }
+    },
   },
-
 
   css: [
     "normalize.css/normalize.css",

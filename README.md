@@ -7,6 +7,13 @@
 [https://www.youtube.com/watch?v=lCxcTsOHrjo](https://www.youtube.com/watch?v=lCxcTsOHrjo)  
 這個影片去練習的
 
+## 整合功能
+
+* Element Plus
+* SCSS
+* UnoCSS
+* Axios
+
 ## 線上Demo
 
 [https://nuxt3-intro.jimmy512.com/](https://nuxt3-intro.jimmy512.com/)

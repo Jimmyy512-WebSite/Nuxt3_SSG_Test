@@ -6,7 +6,6 @@ let axiosInstance: AxiosInstance;
 export const useAxios = () => {
   if (!axiosInstance) {
     const publicConfig = useRuntimeConfig().public
-    console.warn("useAxios publicConfig:",publicConfig);
     // 創建 Axios 實例
     axiosInstance = axios.create({
       baseURL: publicConfig.PUBLIC_API_URL,

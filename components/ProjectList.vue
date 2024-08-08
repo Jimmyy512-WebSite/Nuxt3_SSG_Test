@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <div
       v-for="repo in renderData"
       :key="repo.id"
@@ -12,13 +12,14 @@
           <div
             class="flex items-center justify-between text-base font-semibold"
           >
-            <div class="">{{ repo.name }}</div>
+            <div class="break-all">{{ repo.name }}</div>
             <div>
               {{ repo.stargazers_count }}
               ⭐
             </div>
           </div>
           <p class="text-sm">{{ repo.description }}</p>
+          <p class="text-sm">{{ formatDate(repo.created_at) }}</p>
         </a>
       </div>
     </div>
@@ -26,28 +27,42 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp } from "#app";
-
-const nuxtApp = useNuxtApp();
-let reposData: any = ref([]);
+let reposData = ref<Base.RepoList[]>([]);
 
 const renderData = computed(() => {
   return reposData.value
-    .filter((it:any) => it.description)
-    .sort((a:any, b:any) => {
+    .filter((it: Base.RepoList) => it.description)
+    .sort((a: Base.RepoList, b: Base.RepoList) => {
       return b.stargazers_count - a.stargazers_count;
     });
 });
 
-onMounted(async () => {
-  useAxios()
-    .get("users/jimmyy512/repos")
-    .then((res) => {
-      console.warn("useAxios:", res.data);
+const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZoneName: "short",
+  };
+  return new Date(dateString).toLocaleDateString("zh-TW", options);
+};
 
+onMounted(async () => {
+  // 寫法1 透過 pinia store 呼叫 API
+  useBaseStore().getGithubList().then((res) => {
+    // reposData.value = res.data;
+    console.warn("reposData1:", res.data);
+  });
+
+  // 寫法2 直接呼叫 API
+  useAPI()
+    .getGithubList()
+    .then((res) => {
       reposData.value = res.data;
+      console.warn("reposData2:", reposData.value);
     });
 });
-
-
 </script>

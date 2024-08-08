@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import { onBeforeMount } from "vue";
 onBeforeMount(() => {});
+
 </script>
 
 <style lang="scss" scoped>

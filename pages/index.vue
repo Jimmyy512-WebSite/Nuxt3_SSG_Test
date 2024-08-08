@@ -303,7 +303,6 @@ const handleMobileMenuClick = () => {
     isFirstLoad.value = false;
   }
   isShowMobileMenu.value = !isShowMobileMenu.value;
-  console.warn("isShowMobileMenu:", isShowMobileMenu.value);
 };
 </script>
 

@@ -2,6 +2,23 @@
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
+    // "paths": {
+    //   "@types/*": ["./types/*"],
+    // },
     "verbatimModuleSyntax": true
-  }
+  },
+  "include": [
+    "./types/**/*.d.ts", // 此選項為手動新增的
+    "./.nuxt/nuxt.d.ts",
+    "./.config/nuxt.*",
+    "./**/*",
+    "./node_modules/@element-plus/nuxt/runtime",
+    "./node_modules/nuxt-font-loader/runtime",
+    "./node_modules/@unocss/nuxt/runtime",
+    "./node_modules/@vueuse/nuxt/runtime",
+    "./node_modules/@pinia/nuxt/runtime",
+    "./node_modules/@nuxt/devtools/runtime",
+    "./node_modules/@nuxt/telemetry/runtime",
+    "."
+  ],
 }
