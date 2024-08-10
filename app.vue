@@ -7,9 +7,22 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount } from "vue";
-onBeforeMount(() => {});
-
+// 初始化階段就事先檢查主題色
+useHead({
+  script: [
+    {
+      children: `
+        (function() {
+          const themeMode = localStorage.getItem('themeMode');
+          if (themeMode === 'true') {
+            document.documentElement.classList.add('dark');
+          }
+        })();
+      `,
+      type: "text/javascript",
+    },
+  ],
+});
 </script>
 
 <style lang="scss" scoped>

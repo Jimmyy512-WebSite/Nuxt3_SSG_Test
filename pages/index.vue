@@ -27,6 +27,7 @@
         </div>
 
         <el-switch
+          v-if="isMounted"
           class="!hidden sm:!flex sm:items-center"
           v-model="themeMode"
           size="large"
@@ -34,14 +35,15 @@
           :active-action-icon="Moon"
           :inactive-action-icon="Sunny"
         />
+        <div v-else class="w-50px h-40px"></div>
       </div>
     </div>
 
     <!-- main content -->
-    <div class="mx-auto max-w-4xl scroll-m-[100px]" id="Home">
+    <div class="mx-auto max-w-4xl" id="Home">
       <!-- introduction -->
       <div
-        class="MinHeight flex flex-col-reverse items-center justify-center gap-8 p-6 sm:flex-row"
+        class="min-h-[calc(100vh_-_68px)] flex flex-col-reverse items-center justify-center gap-8 p-6 sm:flex-row"
       >
         <div class="sm:w-1/2">
           <div
@@ -75,7 +77,7 @@
       <!-- our rockets -->
       <div
         id="Rockets"
-        class="scroll-mt-[50px] px-6 py-12 text-center text-4xl font-bold sm:text-5xl"
+        class="px-6 py-100px text-center text-4xl font-bold sm:text-5xl"
       >
         <div class="mb-12">Our Rockets</div>
 
@@ -111,7 +113,7 @@
       <!-- testimonials -->
       <div
         id="Testimonials"
-        class="scroll-mt-[50px] py-12 text-center text-4xl font-bold sm:text-5xl"
+        class="py-100px text-center text-4xl font-bold sm:text-5xl"
       >
         Testimonials
 
@@ -121,9 +123,7 @@
             a wooden crate as expected. Life-long customer! A++ shopping
             experience.
           </div>
-          <div class="text-right text-2xl text-slate-700 dark:text-slate-400">
-            —Wile E. Coyote, Genius
-          </div>
+          <div class="TestimonialBlockName">—Wile E. Coyote, Genius</div>
         </div>
 
         <div class="Testimonial mx-auto max-w-4xl px-2">
@@ -134,9 +134,7 @@
             contract for space exploration rockets based on Acme's quality and
             sturdy designs.
           </div>
-          <div class="text-right text-2xl text-slate-700 dark:text-slate-400">
-            —Marvin The Martian & K-9
-          </div>
+          <div class="TestimonialBlockName">—Marvin The Martian & K-9</div>
         </div>
 
         <div class="Testimonial mx-auto max-w-4xl px-2">
@@ -145,9 +143,7 @@
             mission in space. Acme delivered in one day! Nothing says "Take me
             to your leader" like Acme's Infinity Rocket! 💯
           </div>
-          <div class="text-right text-2xl text-slate-700 dark:text-slate-400">
-            —Buzz Lightyear
-          </div>
+          <div class="TestimonialBlockName">—Buzz Lightyear</div>
         </div>
       </div>
 
@@ -155,7 +151,7 @@
 
       <div
         id="Contact"
-        class="scroll-mt-[50px] py-12 text-center text-4xl font-bold sm:text-5xl"
+        class="py-100px text-center text-4xl font-bold sm:text-5xl"
       >
         Contact Us
       </div>
@@ -249,7 +245,16 @@
         @click="isShowMobileMenu = false"
         >Projects</a
       >
-      <div class="h-50 bg-b w-52"></div>
+
+      <el-switch
+        v-if="isMounted"
+        class="sm:!flex sm:items-center p-48px"
+        v-model="themeMode"
+        size="large"
+        style="--el-switch-on-color: #1a2b3c"
+        :active-action-icon="Moon"
+        :inactive-action-icon="Sunny"
+      />
     </div>
   </div>
 </template>
@@ -260,11 +265,14 @@ import { Sunny, Moon, Close } from "@element-plus/icons-vue";
 
 let isShowMobileMenu = ref(false);
 let isFirstLoad = ref(true);
-let themeMode = ref(true);
+let isMounted = ref(false);
+let themeMode = useLocalStorage("themeMode", false);
+
 let formData = reactive({
   subject: "",
   message: "",
 });
+
 const initHtmlDarkTag = () => {
   let htmlTag = document?.querySelector("html");
   if (htmlTag) {
@@ -275,10 +283,6 @@ const initHtmlDarkTag = () => {
     }
   }
 };
-
-watchEffect(() => {
-  initHtmlDarkTag();
-});
 
 let RocketsBlockList = reactive([
   {
@@ -304,27 +308,39 @@ const handleMobileMenuClick = () => {
   }
   isShowMobileMenu.value = !isShowMobileMenu.value;
 };
+
+onMounted(() => {
+  isMounted.value = true;
+});
+
+watchEffect(() => {
+  initHtmlDarkTag();
+});
+
 </script>
 
 <style lang="scss" scoped>
-.TestimonialBlockContent {
-  @apply relative my-2 p-14 text-left text-xl  text-slate-700  before:absolute before:-left-0 before:-top-0 before:translate-x-2 before:translate-y-2 before:font-serif before:text-8xl before:opacity-25 before:content-['\201C'] after:absolute after:bottom-0 after:right-0 after:translate-x-0 after:translate-y-8 after:font-serif after:text-8xl after:opacity-25 after:content-['\201D'] sm:my-12 sm:text-3xl;
-}
-
-.TestimonialBlockName {
-  @apply text-right text-2xl text-slate-700;
-}
-
-.MinHeight {
-  min-height: calc(100vh - 68px);
-}
-
-@media (prefers-color-scheme: dark) {
+.Testimonial {
   .TestimonialBlockContent {
-    @apply text-slate-400;
+    @apply relative my-2 p-14 text-left text-xl text-slate-700 
+  before:(absolute left-0 top-0 translate-x-2 translate-y-2 font-serif text-8xl opacity-25 content-['\201C']) 
+  after:(absolute bottom-0 right-0 translate-x-0 translate-y-8 font-serif text-8xl opacity-25 content-['\201D']) 
+  sm:(my-12 text-3xl);
   }
+
   .TestimonialBlockName {
-    @apply text-slate-400;
+    @apply text-right text-2xl text-slate-700;
+  }
+}
+
+html.dark {
+  .Testimonial {
+    .TestimonialBlockContent {
+      @apply text-slate-400;
+    }
+    .TestimonialBlockName {
+      @apply text-slate-400;
+    }
   }
 }
 
@@ -339,6 +355,7 @@ const handleMobileMenuClick = () => {
 .rotate-back {
   animation: rotate-back 0.3s forwards;
 }
+
 @keyframes rotate-to-x {
   from {
     transform: rotate(0deg);

@@ -7,22 +7,19 @@ export default defineNuxtConfig({
     "nuxt-font-loader",
     "@unocss/nuxt",
     "@vueuse/nuxt",
-    '@pinia/nuxt'
+    "@pinia/nuxt",
   ],
-
   runtimeConfig: {
     public: {
       isDev: process.env.NODE_ENV === "development",
       PUBLIC_API_URL: process.env.API_DOMAIN,
     },
   },
-
   css: [
     "normalize.css/normalize.css",
     "animate.css/animate.min.css",
     "~/assets/style/main.scss",
   ],
-
   fontLoader: {
     local: [
       {
@@ -32,6 +29,5 @@ export default defineNuxtConfig({
       },
     ],
   },
-
   compatibilityDate: "2024-07-31",
 } as any);
