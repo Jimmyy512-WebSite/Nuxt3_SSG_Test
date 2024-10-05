@@ -1,6 +1,6 @@
 <template>
-  <div class="py-20px ">
-    <div class="text-2xl font-semibold text-center mb-6">
+  <div class="py-20px">
+    <div class="text-24px font-semibold text-center mb-24px">
       <span
         class="cursor-pointer hover:color-blue"
         @click="useRouter().push({ path: '/' })"
@@ -20,7 +20,6 @@
         <PiniaTest></PiniaTest>
       </el-tab-pane>
     </el-tabs>
-
   </div>
 </template>
 

@@ -3,10 +3,10 @@
     <div
       v-for="repo in renderData"
       :key="repo.id"
-      class="grid grid-cols-1 gap-4"
+      class="grid grid-cols-1 gap-16px"
     >
       <div
-        class="mb-2 rounded-sm border border-gray-200 p-4 font-mono first:mt-2 hover:cursor-pointer hover:bg-gray-100"
+        class="mb-8px rounded-sm border border-gray-200 p-16px font-mono first:mt-8px hover:cursor-pointer hover:bg-gray-100"
       >
         <a :href="repo.html_url" target="_blank">
           <div
@@ -18,8 +18,8 @@
               ⭐
             </div>
           </div>
-          <p class="text-sm">{{ repo.description }}</p>
-          <p class="text-sm">{{ formatDate(repo.created_at) }}</p>
+          <p class="text-14px">{{ repo.description }}</p>
+          <p class="text-14px">{{ formatDate(repo.created_at) }}</p>
         </a>
       </div>
     </div>
@@ -52,10 +52,12 @@ const formatDate = (dateString: string) => {
 
 onMounted(async () => {
   // 寫法1 透過 pinia store 呼叫 API
-  useBaseStore().getGithubList().then((res) => {
-    // reposData.value = res.data;
-    console.warn("reposData1:", res.data);
-  });
+  useBaseStore()
+    .getGithubList()
+    .then((res) => {
+      // reposData.value = res.data;
+      console.warn("reposData1:", res.data);
+    });
 
   // 寫法2 直接呼叫 API
   useAPI()
