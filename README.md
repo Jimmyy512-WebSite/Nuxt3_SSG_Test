@@ -15,8 +15,10 @@
 * Axios
 
 ## 線上Demo
-
 [https://nuxt3-intro.jimmy512.com/](https://nuxt3-intro.jimmy512.com/)
+
+## 專案架構文件
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Jimmyy512-WebSite/Nuxt3_SSG_Test)
 
 ## Docker 運行生產環境
 
